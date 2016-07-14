@@ -7,9 +7,7 @@
 
 ## Vader Search And Rate
 
-![search](https://raw.github.com/arindampradhan/Team_Vader/master/search.png)
-
-Making with lots of pizza , coke and love.
+Making with lots of **pizza** :pizza: , **coke** :beer: and **love** :heart:.
 
 ## Team Members
 
