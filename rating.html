@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/rating.css">
+    <link rel="stylesheet" href="/css/algolia.css">
+</head>
+<style>
+.aa-dropdown-menu{
+    top: 100% !important;
+    left: 0px;
+    z-index: 100;
+    display: none;
+    right: auto;
+    position: absolute !important;
+}
+
+</style>
+<body>
+<header class='jumbotron'>
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <form action="#" class="form">
+          <input class="form-control " id="contacts" name="contacts" type="text" placeholder='Search' />
+        </form>
+      </div>
+      <div class="col-sm-2">
+        <img class="input-logo-fix" src="./img/magnifying-glass.svg">
+      </div>
+    </div>
+</header>
+
+
+
+<div class="container card-contain" >
+</div>
+
+
+
+<footer class="panel-footer">
+    Made with love and power of a search engine.
+</footer>
+
+
+<script src="./js/ajax.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script>
+  function initMap() {
+    var mapDiv = document.getElementById('map');
+    var map = new google.maps.Map(mapDiv, {
+        center: {lat: 44.540, lng: -78.546},
+        zoom: 8
+    });
+  }
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLTwL7ffZJ1KPd8TqYVuCYN9qD7VwuZII&callback=initMap">
+</script>
+
+
+<!-- Javascripts -->
+<scripts src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></scripts>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<script>
+      var client = algoliasearch('LOK8KJN4L5', '342157732c640228e1733dc5c3d7cf5f');
+      var index = client.initIndex('fp');
+
+
+      $('#contacts').autocomplete({ hint: true }, [
+        {
+          source: function(q, cb) {
+            index.search(q, { hitsPerPage: 10 }, function(error, content) {
+              if (error) {
+                cb([]);
+                return;
+              }
+              cb(content.hits, content);
+            });
+          },
+          displayKey: 'name',
+          templates: {
+            suggestion: function(suggestion) {
+              console.log(suggestion);
+              return suggestion["Business Name"];
+            }
+
+          }
+        }
+      ]).on('autocomplete:selected', function(event, suggestion, dataset) {
+          myBlurFunction(0);
+          $('#contacts').val(suggestion["Business Name"]);
+          console.log(suggestion["Tag"]);
+          window.location.href = "http://www."+suggestion["Tag"]+".nowfloats.com";
+        });
+
+      $('#contacts').on('click',function(){
+        myBlurFunction(1);
+      })
+      $('.list-group,.jumbotron').on('click',function(){
+        myBlurFunction(0);
+      });
+
+
+    </script>
+    <script type="text/javascript">
+      myBlurFunction = function(state) {
+    /* state can be 1 or 0 */
+    var overlayEle = document.getElementById('overlay');
+
+        if (state) {
+            $("header").addClass("blur");
+            $("footer").addClass("blur");
+            $(".list-group").addClass("blur");
+        } else {
+            $("header").removeClass("blur");
+            $("footer").removeClass("blur");
+            $(".list-group").removeClass("blur");
+        }
+    };
+    $(document).mouseup(function (e)
+    {
+        var container = $(".aa-input");
+
+        if (!container.is(e.target) // if the target of the click isn't the container...
+            && container.has(e.target).length === 0) // ... nor a descendant of the container
+        {
+            myBlurFunction(0)
+        }
+    });
+    </script>
+<script>
+
+function listing(data) {
+  var a = data[0];
+  // update
+  $($(".result > h2")[0]).html(a['name']);
+
+
+}
+var all = [];
+    $.ajax({
+        url: 'http://52.66.87.91/business-listing/',
+        type: 'GET',
+        dataType: 'json',
+    })
+    .done(function(data) {
+        console.log(data);
+        all = data;
+    })
+    .fail(function() {
+        console.log("error");
+    })
+    .always(function() {
+        console.log("complete");
+    });
+
+</script>
+
+
+<script>
+
+var title = 1;
+var rating = 3.5;
+var caption = "asdlkj";
+var get_url = "http://52.66.87.91/business-listing/";
+var lat= 1;
+var long = 2;
+var address = "asdsad";
+var phone = "906781263";
+var hours = "google data";
+var comments = [];
+var user_images = [];
+
+
+var list = `
+<li class="list-group-item">
+    <div class="row">
+        <div class="col-md-2">
+            <img src="./img/img_350X350.gif" alt="" class="img-responsive img-comment-fix">
+        </div>
+        <div class="col-md-8">
+            <b>Arindam Pradhan</b><br>
+            <p>Very awesome concept by nowfloats boost and making india digital.</p>
+        </div>
+    </div>
+</li>
+`;
+
+
+var modal = `
+<div class="panel panel-default  shadow-effect">
+
+  <div class="panel-body">
+    <div class="row">
+        <div class="col-md-6"><h3>TVS MOTORS </h3></div>
+        <div class="col-md-6"><br> </div>
+
+    </div>
+
+    <ul class="list-inline">
+
+<li><i class="fa fa-2x fa-star-o" aria-hidden="true"></i></li>
+<li><i class="fa fa-2x fa-star-o" aria-hidden="true"></i></li>
+<li><i class="fa fa-2x fa-star-o" aria-hidden="true"></i></li>
+<li><i class="fa fa-2x fa-star-o" aria-hidden="true"></i></li><li><i class="fa fa-2x fa-star-o" aria-hidden="true"></i></li>
+   <li><h3><span style="
+    color: #ffb900;
+">4.1/5</span></h3></li>
+    </ul>
+
+<div class="row">
+    <div class="col-md-6">
+        <span>Software company in Hyderbad</span>
+        <br><br>
+        <div class="btn-group">
+        <button class="btn btn-yellow">Read All Reviews</button>&nbsp;
+        <button class="btn btn-yellow pull-right">Write a Review</button>
+        </div>
+    </div>
+</div>
+<br>
+
+<div id="map"></div>
+<div class="container">
+
+<div class="row">
+<br>
+  <label>Address:</label> 3rd Floor, NowFloats Building, Jubilee Hills Road No. 36, Jubilee Hills Checkpost, Hyderababd, Telangana 500033
+
+
+<br>
+  <label>Phone:</label>&nbsp; 9096178236
+
+<br>
+<label>Hours:</label>&nbsp; Open today · 9AM–6PM
+
+</div>
+</div>
+</div>
+<!-- Panel body -->
+<div class="panel-body">
+    <div class="row">
+        <div class="col-md-6"><h2><b>Reviews</b></h2></div>
+        <div class="col-md-6">
+        <br>
+                <div class="btn-group pull-right">
+                <button class="btn btn-yellow">Get Directions</button>&nbsp;
+                <button class="btn btn-yellow pull-right">View</button>
+                </div>
+        </div>
+    </div>
+  <!-- List group -->
+  <ul class="list-group">
+  </ul>
+</div>
+</div>
+</div>
+
+`;
+
+$('.card-contain').html(modal);
+$(".list-group").html(list);
+
+</script>
+</body>
+</html>
+
+
+
+

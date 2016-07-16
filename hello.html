@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <style>
+
+.search-box {
+   width: 210%;
+   height: 70px;
+   color: #6f6f6f ;
+   background-color: #fff !important;
+   font-size: 30px;
+   padding-left: 20px;
+   padding-right: 20px;
+   outline: 0;
+   border-radius: 3px;
+   border: 1px solid #b0c500 ;
+}
+
+.title {
+    font-size: 40px;
+    color: white !important;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.jumbotron {
+    height: 92px;
+    width: 100%;
+    background-color: #ffb900;
+}
+
+.search-box-container {
+    width: 860px;
+    height: 69px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.input-logo-fix {
+    height: 60px;
+    position: absolute;
+    border-radius: 5px;
+    right: 18%;
+    top: 65px;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.listing {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 75%;
+}
+
+.panel-default {
+    border-color: #ddd;
+}
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.panel-body {
+    padding: 15px;
+}
+
+.centering{
+    left: 0;
+    width: 90%;
+    right: 0;
+    margin: auto;
+}
+
+
+.list-group-item {
+    border: 1px solid #ffb900;
+}
+.height-fix{
+    max-height: 120px
+}
+.star-fix{
+    max-height: 60px;
+}
+.paginator {
+    width: 90%;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+</style>
+</head>
+<body>
+<header class='jumbotron'>
+  <div class='search-box-container'>
+    <input id="search-input" type='text' class='search-box' placeholder='Search' autofocus ng-model='query' ng-change='delayedSearch(0)'>
+    <img class="input-logo-fix" src="./img/magnifying-glass.svg">
+  </div>
+</header>
+<div class="container">
+
+
+
+
+<br><br><br>
+<!-- listing container -->
+<ul class="list-group centering">
+  <li class="list-group-item">
+    <div class="row">
+        <div class="col-md-2"><img class="img-responsive height-fix" src="./img/img_350X350.gif" alt=""></div>
+        <div class="col-md-9">
+          <section class='results'>
+            <article class='result'>
+              <h2>Title</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation </p>
+            </article>
+          </section>
+        </div>
+        <div class="col-md-1">
+        <img src="./img/Rating-system.svg" alt="" class=" star-fix img-responsive">
+        <span class="rating">&nbsp;&nbsp;&nbsp;<b>4.5</b></span>
+        </div>
+    </div>
+    </li>
+  <li class="list-group-item">
+    <div class="row">
+        <div class="col-md-2"><img class="img-responsive height-fix" src="./img/img_350X350.gif" alt=""></div>
+        <div class="col-md-9">
+          <section class='results'>
+            <article class='result'>
+              <h2>Title</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation </p>
+            </article>
+          </section>
+        </div>
+        <div class="col-md-1">
+        <img src="./img/Rating-system.svg" alt="" class=" star-fix img-responsive">
+        <span class="rating">&nbsp;&nbsp;&nbsp;<b>4.5</b></span>
+        </div>
+    </div>
+        </li>
+
+  <li class="list-group-item">
+    <div class="row">
+        <div class="col-md-2"><img class="img-responsive height-fix" src="./img/img_350X350.gif" alt=""></div>
+        <div class="col-md-9">
+          <section class='results'>
+            <article class='result'>
+              <h2>Title</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation </p>
+            </article>
+          </section>
+        </div>
+        <div class="col-md-1">
+        <img src="./img/Rating-system.svg" alt="" class=" star-fix img-responsive">
+        <span class="rating">&nbsp;&nbsp;&nbsp;<b>4.5</b></span>
+        </div>
+    </div>
+  <li class="list-group-item">
+    <div class="row">
+        <div class="col-md-2"><img class="img-responsive height-fix" src="./img/img_350X350.gif" alt=""></div>
+        <div class="col-md-9">
+          <section class='results'>
+            <article class='result'>
+              <h2>Title</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation </p>
+            </article>
+          </section>
+        </div>
+        <div class="col-md-1">
+        <img src="./img/Rating-system.svg" alt="" class=" star-fix img-responsive">
+        <span class="rating">&nbsp;&nbsp;&nbsp;<b>4.5</b></span>
+        </div>
+    </div>
+        </li>
+
+  <li class="list-group-item">
+    <div class="row">
+        <div class="col-md-2"><img class="img-responsive height-fix" src="./img/img_350X350.gif" alt=""></div>
+        <div class="col-md-9">
+          <section class='results'>
+            <article class='result'>
+              <h2>Title</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation </p>
+            </article>
+          </section>
+        </div>
+        <div class="col-md-1">
+        <img src="./img/Rating-system.svg" alt="" class=" star-fix img-responsive">
+        <span class="rating">&nbsp;&nbsp;&nbsp;<b>4.5</b></span>
+        </div>
+    </div>
+  </li>
+  </ul>
+
+<br><br><br>
+<nav class="paginator">
+  <ul class="pager">
+    <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
+    <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>
+</div>
+
+<footer class="panel-footer">
+    Made with love and power of a search engine.
+</footer>
+<scripts src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></scripts>
+<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+<script type="text/javascript">
+     /*var client = algoliasearch('LOK8KJN4L5', '342157732c640228e1733dc5c3d7cf5f');
+     var index = client.initIndex('rahul');
+     index.search('ra', function searchDone(err, content) {
+     console.log(content);
+     });*/
+
+     var client = algoliasearch('LOK8KJN4L5', '342157732c640228e1733dc5c3d7cf5f')
+     var index = client.initIndex('fp');
+     autocomplete('#search-input', { hint: true }, [
+       {
+         source: autocomplete.sources.hits(index, { hitsPerPage: 5 }),
+         displayKey: 'name',
+         templates: {
+           suggestion: function(suggestion) {
+             return suggestion._highlightResult.firstname.value;
+             console.log(suggestion);
+           }
+         }
+       }
+     ]).on('autocomplete:selected', function(event, suggestion, dataset) {
+       console.log(suggestion, dataset);
+     });
+
+</script>
+</body>
+</html>
