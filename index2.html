@@ -11,8 +11,8 @@
 </head>
 <body >
 <header class='jumbotron' class="to-blur">
-</header>
 
+</header>
 <div class="container" >
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
@@ -33,7 +33,6 @@
 
     <br><br><br>
 </div>
-
 <div class="navbar navbar-fixed-bottom">
 <footer class="panel-footer">
     Made with love and power of a search engine.
@@ -66,7 +65,8 @@
           displayKey: 'name',
           templates: {
             suggestion: function(suggestion) {
-              // console.log(suggestion);
+                console.log(suggestion);
+               setData(suggestion);
               return suggestion["Business Name"];
             }
 
@@ -75,8 +75,6 @@
       ]).on('autocomplete:selected', function(event, suggestion, dataset) {
          myBlurFunction(0);
          $('#contacts').val(suggestion["Business Name"]);
-         console.log(suggestion["Tag"]);
-         console.log(suggestion)
          window.location.href = "rating.html?tag="+suggestion["Tag"];
        });
 
@@ -152,46 +150,27 @@ function getimgurl(url) {
     }
 }
 
-var all = [];
-    $.ajax({
-        url: 'http://52.66.87.91/business-listing/',
-        type: 'GET',
-        dataType: 'json',
-    })
-    .done(function(dictdata) {
-        console.log(dictdata);
-        var data = [];
-        for (var key in dictdata) {
-            var value = dictdata[key];
-            // Use `key` and `value`
-            data.push(value);
-        }
-        console.log(data)
-        data.forEach(function(item){
+function setData(data)
+{
             var v = Math.random()*10000;
             var u = Math.random()*10;
 
-            var website = geturlfromtag(item['Tag']);
-            var City = item['City'];
-            var imguri = item['TileImageUri'];
-            var imgurl = getimgurl(imguri)
-            console.log(imguri)
-            console.log(imguri)
+            var website = geturlfromtag(data['Tag']);
+            var City = data['City'];
             var Category = "shit"    // item['Category'][0];
-            var Visits = v.toFixed() // item['Unique Visits'];
-            var Update = u.toFixed() // item['Total updates'];
+            var Visits = data["Unique Visits"];
+            var Update = data["Total updates"] // item['Total updates'];
 
-            var Business = item['Name'];
-            var Address = item['Address'];
-            var lat = item['lat'];
-            var long = item['long'];
+            var Business = data['Business Name'];
+            var Address = data['Address'];
+            //var lat = item['lat'];
+            //var long = item['long'];
             Business = toTitleCase(Business);
-            var map_url = go_to_map(Address);
-            console.log(Update);
+            //var map_url = go_to_map(Address);
         var l = `
         <li class="list-group-item">
         <div class="row">
-                <div class="col-md-2"><img class="img-responsive height-fix" src="`+ imgurl +`" alt=""></div>
+                <div class="col-md-2"><img class="img-responsive height-fix" src="" alt=""></div>
                 <div class="col-md-9">
                     <section class="results">
                         <article class="result">
@@ -202,7 +181,7 @@ var all = [];
 
                                 <div class="col-md-2"><br>
                                 <h4>
-                                <a href="`+map_url +`" class="label label-success"><i class="fa fa-lg fa-globe fa-wt" aria-hidden="true"></i>&nbsp;`+ City + `</a>
+                                <a href="" class="label label-success"><i class="fa fa-lg fa-globe fa-wt" aria-hidden="true"></i>&nbsp;`+ City + `</a>
                                 </h4>
                             </div><div class="col-md-1"><br>
                                 <h4>
@@ -230,58 +209,14 @@ var all = [];
         </li>
         `;
         $(".list-group").append(l);
-        })
-    })
-    .fail(function() {
-        console.log("error");
-    })
-    .always(function() {
-        console.log("complete");
-    });
-
-
-</script>
-<script>
-
-function listing(data) {
-  var a = data[0];
-  // update
-  $($(".result > h2")[0]).html(a['name']);
-
-
-}
-
-function geturlfromtag(tag) {
-    var url = "https://"+tag+".nowfloats.com/";
-    return url.toLowerCase()
-}
-
-function toTitleCase(str)
-{
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-}
-
-function go_to_map(str) {
-    var replaced = str.split(' ').join('+');
-    var map_url = "https://www.google.co.in/maps/place/" + replaced;
-    return map_url;
-}
-
-function getimgurl(url) {
-    if (url == null){
-        return "./img/img_350X350.gif"
-    }else{
-        var baseurl = "https://floatingpointimages.s3.amazonaws.com/tile/";
-        url = url.split('/').slice(-1).pop()
-        url = baseurl + url;
-        return url
+        //$($(".list-group").slice(1,10)).prepend(l);
     }
-}
+    $('#contacts').on('input', function() {
+    $('.list-group').html("");
+});
+
 
 </script>
-
-
-
 </body>
 </html>
-<a href=""></a>
+

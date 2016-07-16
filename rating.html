@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/rating.css">
-    <link rel="stylesheet" href="/css/algolia.css">
+    <link rel="stylesheet" href="./css/rating.css">
+    <link rel="stylesheet" href="./css/algolia.css">
 </head>
 <style>
 .aa-dropdown-menu{
@@ -36,169 +36,15 @@
 
 
 <div class="container card-contain" >
-</div>
-
-
-
-<footer class="panel-footer">
-    Made with love and power of a search engine.
-</footer>
-
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script>
-  function initMap() {
-    var mapDiv = document.getElementById('map');
-    var map = new google.maps.Map(mapDiv, {
-        center: {lat: 44.540, lng: -78.546},
-        zoom: 8
-    });
-  }
-</script>
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLTwL7ffZJ1KPd8TqYVuCYN9qD7VwuZII&callback=initMap">
-</script>
-
-
-<!-- Javascripts -->
-<scripts src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></scripts>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
-<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
-<script>
-      var client = algoliasearch('LOK8KJN4L5', '342157732c640228e1733dc5c3d7cf5f');
-      var index = client.initIndex('fp');
-
-
-      $('#contacts').autocomplete({ hint: true }, [
-        {
-          source: function(q, cb) {
-            index.search(q, { hitsPerPage: 10 }, function(error, content) {
-              if (error) {
-                cb([]);
-                return;
-              }
-              cb(content.hits, content);
-            });
-          },
-          displayKey: 'name',
-          templates: {
-            suggestion: function(suggestion) {
-              console.log(suggestion);
-              return suggestion["Business Name"];
-            }
-          }
-        }
-      ]).on('autocomplete:selected', function(event, suggestion, dataset) {
-          myBlurFunction(0);
-          $('#contacts').val(suggestion["Business Name"]);
-          console.log(suggestion["Tag"]);
-          window.location.href = "http://www."+suggestion["Tag"]+".nowfloats.com";
-        });
-
-      $('#contacts').on('click',function(){
-        myBlurFunction(1);
-      })
-      $('.list-group,.jumbotron').on('click',function(){
-        myBlurFunction(0);
-      });
-
-
-    </script>
-    <script type="text/javascript">
-      myBlurFunction = function(state) {
-    /* state can be 1 or 0 */
-    var overlayEle = document.getElementById('overlay');
-
-        if (state) {
-            $("header").addClass("blur");
-            $("footer").addClass("blur");
-            $(".list-group").addClass("blur");
-        } else {
-            $("header").removeClass("blur");
-            $("footer").removeClass("blur");
-            $(".list-group").removeClass("blur");
-        }
-    };
-    $(document).mouseup(function (e)
-    {
-        var container = $(".aa-input");
-
-        if (!container.is(e.target) // if the target of the click isn't the container...
-            && container.has(e.target).length === 0) // ... nor a descendant of the container
-        {
-            myBlurFunction(0)
-        }
-    });
-    </script>
-<script>
-
-function listing(data) {
-  var a = data[0];
-  // update
-  $($(".result > h2")[0]).html(a['name']);
-
-
-}
-
-</script>
-
-<script>
-
-
-$(document).ready(function(){
-
-
-var title = 1;
-var rating = 3.5;
-var caption = "asdlkj";
-var get_url = "http://52.66.87.91/business-listing/";
-var lat= 1;
-var long = 2;
-var address = "asdsad";
-var phone = "906781263";
-var hours = "google data";
-var comments = [];
-var user_images = [];
-
-
-var list = `
-<li class="list-group-item">
-    <div class="row">
-        <div class="col-md-2">
-            <img src="./img/img_350X350.gif" alt="" class="img-responsive img-comment-fix">
-        </div>
-        <div class="col-md-8">
-            <b>Arindam Pradhan</b><br>
-            <p>Very awesome concept by nowfloats boost and making india digital.</p>
-        </div>
-    </div>
-</li>
-`;
-
-
-var point = `
-<li>
-  <h3>
-    <span style=" color: #ffb900; ">4.1/5</span>
-  </h3>
-</li>
-`;
-
-
-var stars = `
-`;
-
-var modal = `
 <div class="panel panel-default  shadow-effect">
 
   <div class="panel-body">
     <div class="row">
-        <div class="col-md-6"><h3>TVS MOTORS </h3></div>
+        <div class="col-md-6"><h3 id="title">TVS MOTORS </h3></div>
         <div class="col-md-6"><br> </div>
     </div>
     <!-- star list -->
-    <ul class="list-inline">
+    <ul id="starslist" class="list-inline">
     <li><i class="fa fa-2x fa-star-o" aria-hidden="true"></i></li>
     <li><i class="fa fa-2x fa-star-o" aria-hidden="true"></i></li>
     <li><i class="fa fa-2x fa-star-o" aria-hidden="true"></i></li>
@@ -253,13 +99,134 @@ var modal = `
 </div>
 </div>
 </div>
-`;
+</div>
 
-$('.card-contain').html(modal);
-$(".list-group").html(list);
-$(".list-inline").append(point);
 
-    // COde here
+
+<footer class="panel-footer">
+    Made with love and power of a search engine.
+</footer>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLTwL7ffZJ1KPd8TqYVuCYN9qD7VwuZII">
+</script>
+
+
+<!-- Javascripts -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<script>
+      var client = algoliasearch('LOK8KJN4L5', '342157732c640228e1733dc5c3d7cf5f');
+      var index = client.initIndex('fp');
+
+
+      $('#contacts').autocomplete({ hint: true }, [
+        {
+          source: function(q, cb) {
+            index.search(q, { hitsPerPage: 10 }, function(error, content) {
+              if (error) {
+                cb([]);
+                return;
+              }
+              cb(content.hits, content);
+            });
+          },
+          displayKey: 'name',
+          templates: {
+            suggestion: function(suggestion) {
+              console.log(suggestion);
+              return suggestion["Business Name"];
+            }
+          }
+        }
+      ]).on('autocomplete:selected', function(event, suggestion, dataset) {
+         myBlurFunction(0);
+         $('#contacts').val(suggestion["Business Name"]);
+         window.location.href = "rating.html?tag="+suggestion["Tag"];
+       });
+
+      $('#contacts').on('click',function(){
+        myBlurFunction(1);
+      })
+      $('.list-group,.jumbotron').on('click',function(){
+        myBlurFunction(0);
+      });
+
+
+    </script>
+    <script type="text/javascript">
+      myBlurFunction = function(state) {
+    /* state can be 1 or 0 */
+    var overlayEle = document.getElementById('overlay');
+
+        if (state) {
+            $("header").addClass("blur");
+            $("footer").addClass("blur");
+            $(".list-group").addClass("blur");
+        } else {
+            $("header").removeClass("blur");
+            $("footer").removeClass("blur");
+            $(".list-group").removeClass("blur");
+        }
+    };
+    $(document).mouseup(function (e)
+    {
+        var container = $(".aa-input");
+
+        if (!container.is(e.target) // if the target of the click isn't the container...
+            && container.has(e.target).length === 0) // ... nor a descendant of the container
+        {
+            myBlurFunction(0)
+        }
+    });
+    </script>
+<script>
+
+function listing(data) {
+  var a = data[0];
+  // update
+  $($(".result > h2")[0]).html(a['name']);
+
+
+}
+
+</script>
+
+<script>
+
+function go_to_map(str) {
+    var replaced = str.split(' ').join('+');
+    var map_url = "https://www.google.co.in/maps/place/" + replaced;
+    return map_url;
+}
+
+
+$(document).ready(function(){
+
+
+var title = 1;
+var rating = 3.5;
+var caption = "asdlkj";
+var get_url = "http://52.66.87.91/business-listing/";
+var lat= 1;
+var long = 2;
+var address = "asdsad";
+var phone = "906781263";
+var hours = "google data";
+var comments = [];
+var user_images = [];
+
+function generatemap() {
+
+}
+
+
+
      var parameter=location.search.split("?")[1];
      var va=parameter.split("tag=")[1];
      $.ajax({
@@ -269,9 +236,89 @@ $(".list-inline").append(point);
      })
      .done(function(data) {
          data = data[0];
+         console.log(data)
+         var Address=  data['Address'];
+         var rating = (Math.random()*5).toFixed(); // Creating the random generator
+         var City = data['City']
+         var location = data['location'];
+         var lat = data['latitude'];
+         var lon = data['longitude'];
+         var URL = data['RootAliasUri'];
+         var phone = data['PrimaryNumber'];
+         var pincode = data['PinCode'];
+         var description = data['Description'];
+         var name = data['Name'];
+         var tag = data['Tag'];
+         var nfratings = data['ratings'];
+         var map_url = go_to_map(name);
+        var template = `
+        <div class="panel panel-default  shadow-effect">
 
-         $(modal).children('.list-inline').html('fuck');
+          <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6"><h3 id="title"> <a class="yellow" href="`+URL+`">`+name+` </a></h3></div>
+                <div class="col-md-6"><br> </div>
+            </div>
+            <!-- star list -->
+            <ul id="starslist" class="list-inline">
+            <li><i class="fa fa-2x fa-star-o" aria-hidden="true"></i></li>
+            <li><i class="fa fa-2x fa-star-o" aria-hidden="true"></i></li>
+            <li><i class="fa fa-2x fa-star-o" aria-hidden="true"></i></li>
+            <li><i class="fa fa-2x fa-star-o" aria-hidden="true"></i></li>
+            <li><i class="fa fa-2x fa-star-o" aria-hidden="true"></i></li>
+            <li><h3 class="yellow"><span id="hrating" >No Ratings<span>/5</h3></li>
+            </ul>
 
+        <div class="row">
+            <div class="col-md-6">
+                <span>`+description+`</span>
+                <br><br>
+                <div class="btn-group">
+                  <a href="`+map_url+`"><button class="btn btn-yellow" >Get Directions</button></a>&nbsp;
+                  <a href="`+URL+`"><button id="view" class="btn btn-yellow pull-right">View</button></a>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div id="map"></div>
+        <div class="container">
+
+        <div class="row">
+        <br>
+          <label>Address:</label> `+Address +`
+        <br>
+          <label>Phone:</label>&nbsp; `+phone+`
+
+        <br>
+        <label>Hours:</label>&nbsp; Open today · 9AM–6PM
+
+        </div>
+        </div>
+        </div>
+        <!-- Panel body -->
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6"><h2><b>Reviews</b></h2></div>
+                <div class="col-md-6">
+                <br>
+                        <div class="btn-group pull-right">
+                        <button class="btn btn-yellow">Read All Reviews</button>&nbsp;
+                        <button class="btn btn-yellow pull-right">Write a Review</button>
+                        </div>
+                </div>
+            </div>
+          <!-- List group -->
+          <ul class="list-group">
+          </ul>
+        </div>
+        </div>
+        </div>
+        `;
+
+        $(".card-contain").html(template);
+      wrap();
+      initMap(lat,long);
      })
      .fail(function() {
          console.log("error");
@@ -279,7 +326,69 @@ $(".list-inline").append(point);
      .always(function() {
          console.log("complete");
      });
+
+
+
+
 });
+
+
+</script>
+<script>
+
+
+function wrap() {
+
+  var parameter=location.search.split("?")[1];
+  var v=parameter.split("tag=")[1];
+  $.ajax({
+    url: 'http://52.66.87.91/business-listing/rnr.php?tag=' + v,
+    type: 'GET',
+    dataType: 'json',
+  })
+  .done(function(data) {
+    console.log(data);
+    var rating = data['rating'] + "/5";
+    $("#hrating").html(rating);
+    var dictreviews = data['reviews'];
+    var reviews = [];
+    for (var key in dictreviews) {
+        var value = dictreviews[key];
+        // Use `key` and `value`
+        reviews.push(value);
+    }
+    console.log(reviews);
+    reviews.forEach(function (review) {
+      var list = `
+      <li class="list-group-item">
+          <div class="row">
+              <div class="col-md-2">
+                  <img src="./img/img_350X350.gif" alt="" class="img-responsive img-comment-fix">
+              </div>
+              <div class="col-md-8">
+                  <b>`+review['author']+`</b>&nbsp;&nbsp;`+review['rating']+`
+                  <p>`+review['text']+`</p>
+              </div>
+          </div>
+      </li>
+      `;
+
+
+      $(".list-group").append(list);
+    })
+
+
+  })
+}
+
+
+    function initMap(lat,lon) {
+    var mapDiv = document.getElementById('map');
+    var map = new google.maps.Map(mapDiv, {
+        center: {lat: 44.540, lng: -78.546},
+        zoom: 8
+    });
+  }
 
 
 </script>

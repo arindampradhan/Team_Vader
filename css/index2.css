@@ -17,6 +17,10 @@
     text-align: center;
     padding-top: 40px;
 }
+.yellow{
+    color:#ffb900 !important;
+}
+
 
 .jumbotron {
     height: 92px;

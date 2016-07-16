@@ -194,3 +194,7 @@ box-shadow: 4px 6px 76px 9px rgba(150,201,125,0.86);
 .aa-hint {
     background: none 0% 0% / auto repeat scroll padding-box border-box rgba(255, 255, 255, 0) !important;
 }
+
+.yellow{
+    color:#ffb900 !important;
+}
