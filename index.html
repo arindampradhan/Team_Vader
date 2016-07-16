@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./css/algolia.css">
-    <link rel="stylesheet" href="./css/index2.css">
+    <link rel="stylesheet" href="/css/algolia.css">
+    <link rel="stylesheet" href="/css/index2.css">
 </head>
 <body >
 <header class='jumbotron' class="to-blur">
@@ -21,7 +21,7 @@
         </form>
       </div>
       <div class="col-sm-2">
-        <img class="input-logo-fix" src="./img/magnifying-glass.svg">
+        <img class="input-logo-fix" src="/img/magnifying-glass.svg">
       </div>
     </div>
 
@@ -47,7 +47,7 @@
 <!-- algolia -->
 <script>
       var client = algoliasearch('LOK8KJN4L5', '342157732c640228e1733dc5c3d7cf5f');
-      var index = client.initIndex('fp');
+      var index = client.initIndex('fps');
 
 
       $('#contacts').autocomplete({ hint: true }, [
@@ -74,6 +74,7 @@
          myBlurFunction(0);
          $('#contacts').val(suggestion["Business Name"]);
          console.log(suggestion["Tag"]);
+         console.log(suggestion)
          window.location.href = "rating.html?tag="+suggestion["Tag"];
        });
 
@@ -140,7 +141,7 @@ function go_to_map(str) {
 
 function getimgurl(url) {
     if (url == null){
-        return "./img/img_350X350.gif"
+        return "/img/img_350X350.gif"
     }else{
         var baseurl = "https://floatingpointimages.s3.amazonaws.com/tile/";
         url = url.split('/').slice(-1).pop()
