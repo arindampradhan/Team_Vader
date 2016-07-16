@@ -9,6 +9,18 @@
 
 Making with lots of **pizza** :pizza: , **coke** :beer: and **love** :heart:.
 
+## Powered by the coolest search engine ever... :purple_heart::purple_heart::purple_heart:
+
+![algolia](http://500.co/wp-content/uploads/2015/04/algolia.png)
+
+## Stuffs we Wrote
+
+* crawlers
+* business-listing
+* JustDialScraper
+* frontend
+
+
 ## Team Members
 
 * Sajal :smiley_cat:
