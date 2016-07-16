@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/algolia.css">
+    <link rel="stylesheet" href="./css/index2.css">
+</head>
+<body >
+<header class='jumbotron' class="to-blur">
+
+</header>
+<div class="container" >
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <form action="#" class="form">
+          <input class="form-control" id="contacts" name="contacts" type="text" placeholder='Search' />
+        </form>
+      </div>
+      <div class="col-sm-2">
+        <img class="input-logo-fix" src="./img/magnifying-glass.svg">
+      </div>
+    </div>
+
+    <br><br><br>
+    <!-- listing container -->
+    <!-- jquery uploaded -->
+    <ul class="list-group centering" class="to-blur">
+    </ul>
+
+    <br><br><br>
+</div>
+<footer class="panel-footer">
+    Made with love and power of a search engine.
+</footer>
+
+
+
+<!-- Javascripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<!-- algolia -->
+<script>
+      var client = algoliasearch('LOK8KJN4L5', '342157732c640228e1733dc5c3d7cf5f');
+      var index = client.initIndex('fp');
+
+
+      $('#contacts').autocomplete({ hint: true }, [
+        {
+          source: function(q, cb) {
+            index.search(q, { hitsPerPage: 10 }, function(error, content) {
+              if (error) {
+                cb([]);
+                return;
+              }
+              cb(content.hits, content);
+            });
+          },
+          displayKey: 'name',
+          templates: {
+            suggestion: function(suggestion) {
+              // console.log(suggestion);
+              return suggestion["Business Name"];
+            }
+
+          }
+        }
+      ]).on('autocomplete:selected', function(event, suggestion, dataset) {
+         myBlurFunction(0);
+         $('#contacts').val(suggestion["Business Name"]);
+         console.log(suggestion["Tag"]);
+         window.location.href = "rating.html?tag="+suggestion["Tag"];
+       });
+
+      $('#contacts').on('click',function(){
+        myBlurFunction(1);
+      })
+      $('.list-group,.jumbotron').on('click',function(){
+        myBlurFunction(0);
+      });
+
+
+    </script>
+    <script type="text/javascript">
+      myBlurFunction = function(state) {
+    /* state can be 1 or 0 */
+    var overlayEle = document.getElementById('overlay');
+
+        if (state) {
+            $("header").addClass("blur");
+            $("footer").addClass("blur");
+            $(".list-group").addClass("blur");
+        } else {
+            $("header").removeClass("blur");
+            $("footer").removeClass("blur");
+            $(".list-group").removeClass("blur");
+        }
+    };
+    $(document).mouseup(function (e)
+    {
+        var container = $(".aa-input");
+
+        if (!container.is(e.target) // if the target of the click isn't the container...
+            && container.has(e.target).length === 0) // ... nor a descendant of the container
+        {
+            myBlurFunction(0)
+        }
+    });
+    </script>
+<script>
+
+function listing(data) {
+  var a = data[0];
+  // update
+  $($(".result > h2")[0]).html(a['name']);
+
+
+}
+
+function geturlfromtag(tag) {
+    var url = "https://"+tag+".nowfloats.com/";
+    return url.toLowerCase()
+}
+
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+function go_to_map(str) {
+    var replaced = str.split(' ').join('+');
+    var map_url = "https://www.google.co.in/maps/place/" + replaced;
+    return map_url;
+}
+
+function getimgurl(url) {
+    if (url == null){
+        return "./img/img_350X350.gif"
+    }else{
+        var baseurl = "https://floatingpointimages.s3.amazonaws.com/tile/";
+        url = url.split('/').slice(-1).pop()
+        url = baseurl + url;
+        return url
+    }
+}
+
+var all = [];
+    $.ajax({
+        url: 'http://52.66.87.91/business-listing/',
+        type: 'GET',
+        dataType: 'json',
+    })
+    .done(function(dictdata) {
+        console.log(dictdata);
+        var data = [];
+        for (var key in dictdata) {
+            var value = dictdata[key];
+            // Use `key` and `value`
+            data.push(value);
+        }
+        console.log(data)
+        data.forEach(function(item){
+            var v = Math.random()*10000;
+            var u = Math.random()*10;
+
+            var website = geturlfromtag(item['Tag']);
+            var City = item['City'];
+            var imguri = item['TileImageUri'];
+            var imgurl = getimgurl(imguri)
+            console.log(imguri)
+            console.log(imguri)
+            var Category = "shit"    // item['Category'][0];
+            var Visits = v.toFixed() // item['Unique Visits'];
+            var Update = u.toFixed() // item['Total updates'];
+
+            var Business = item['Name'];
+            var Address = item['Address'];
+            var lat = item['lat'];
+            var long = item['long'];
+            Business = toTitleCase(Business);
+            var map_url = go_to_map(Address);
+            console.log(Update);
+        var l = `
+        <li class="list-group-item">
+        <div class="row">
+                <div class="col-md-2"><img class="img-responsive height-fix" src="`+ imgurl +`" alt=""></div>
+                <div class="col-md-9">
+                    <section class="results">
+                        <article class="result">
+                            <div class="row">
+                                <div class="col-md-8">
+                                   <h2> <a class="col-title" href="`+ website+`">`+ Business +`</a></h2>
+                                </div>
+
+                                <div class="col-md-2"><br>
+                                <h4>
+                                <a href="`+map_url +`" class="label label-success"><i class="fa fa-lg fa-globe fa-wt" aria-hidden="true"></i>&nbsp;`+ City + `</a>
+                                </h4>
+                            </div><div class="col-md-1"><br>
+                                <h4>
+                                <!--
+                                <span class="label label-warning">&nbsp;`+ Category +`</span>
+                                -->
+                                </h4>
+                            </div>
+                        </div>
+                        <p>
+                        <label for="Address">Address: </label>
+                        `+Address +`
+                        </p>
+                    </article>
+                </section>
+            </div>
+            <div class="col-md-1">
+                <i class="fa fa-3x fa-user-plus" aria-hidden="true"></i>
+                <span class="rating"><b>`+Visits+`</b></span>
+                <i class="fa fa-3x fa-pencil" aria-hidden="true"></i>
+                <span class="rating"><br><b>`+ Update +`</b></span>
+
+            </div>
+        </div>
+        </li>
+        `;
+        $(".list-group").append(l);
+        })
+    })
+    .fail(function() {
+        console.log("error");
+    })
+    .always(function() {
+        console.log("complete");
+    });
+
+
+</script>
+</body>
+</html>
+<a href=""></a>
